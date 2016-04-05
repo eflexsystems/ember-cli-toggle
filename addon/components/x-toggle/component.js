@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from './template';
 
-const { on, run, computed, observer } = Ember;
+const { computed } = Ember;
 
 export default Ember.Component.extend({
   layout: layout,
@@ -37,57 +37,41 @@ export default Ember.Component.extend({
     return this.get('elementId') + '-x-toggle';
   }),
 
-  wasToggled: on('init', observer('toggled', function () {
-    var toggled = this.get('toggled');
+  didUpdateAttrs: function({newAttrs, oldAttrs}) {
+    if (!oldAttrs) {
+      oldAttrs = {};
+    }
+
     var offIndex = this.get('offLabel').indexOf(':');
     var onIndex = this.get('onLabel').indexOf(':');
     var offState = offIndex > -1 ? this.get('offLabel').substr(offIndex + 1) : false;
     var onState = onIndex > -1 ? this.get('onLabel').substr(onIndex + 1) : true;
 
-    this.sendAction('toggle', toggled, this.get('name'));
-
-    if (toggled === false) {
-      this.set('value', offState);
-    } else {
-      this.set('value', onState);
+    if (newAttrs.toggled !== oldAttrs.toggled) {
+      if (newAttrs.toggled === false) {
+        newAttrs.value = offState;
+      } else {
+        newAttrs.value = onState;
+      }
+    } else if (newAttrs.value !== oldAttrs.value) {
+      if (newAttrs.value === onState) {
+        newAttrs.toggled = true;
+      } else {
+        newAttrs.toggled = false;
+        newAttrs.value = offState;
+      }
     }
-  })),
 
-  valueObserver: on('init', observer('value', function() {
-    var debounce = this.get('debounce');
-
-    if (!debounce) {
-      debounce = run.debounce(this, function () {
-        var value = this.get('value');
-        var offIndex = this.get('offLabel').indexOf(':');
-        var onIndex = this.get('onLabel').indexOf(':');
-        var offState = offIndex > -1 ? this.get('offLabel').substr(offIndex + 1) : false;
-        var onState = onIndex > -1 ? this.get('onLabel').substr(onIndex + 1) : true;
-
-        if (value === onState) {
-          this.set('toggled', true);
-        } else {
-          this.set('toggled', false);
-          this.set('value', offState);
-        }
-
-        this.set('debounce', null);
-      }, 500);
-
-      this.set('debounce', debounce);
-    }
-  })),
-
-  clearDebounce: on('willDestroyElement', function () {
-    var debounce = this.get('debounce');
-
-    if (debounce) {
-      run.cancel(debounce);
-      this.set('debounce', null);
-    }
-  }),
+    this._super(...arguments);
+  },
 
   click(event) {
     event.stopPropagation();
+  },
+
+  actions: {
+    checkedChanged: function(e) {
+      this.sendAction('toggle', e);
+    }
   }
 });
