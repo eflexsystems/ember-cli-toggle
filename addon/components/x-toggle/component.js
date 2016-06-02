@@ -6,7 +6,7 @@ const { computed } = Ember;
 export default Ember.Component.extend({
   layout: layout,
   tagName: 'span',
-  classNameBindings: ['toggled:x-toggle-container-checked', 'disabled:x-toggle-container-disabled'],
+  classNameBindings: ['value:x-toggle-container-checked', 'disabled:x-toggle-container-disabled'],
   classNames: ['x-toggle-container'],
   disabled: false,
   value: false,
