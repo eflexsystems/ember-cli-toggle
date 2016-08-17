@@ -1,5 +1,5 @@
 {
-  "name": "ember-cli-toggle",
+  "name": "eflex-ember-cli-toggle",
   "version": "1.0.0",
   "description": "Checkbox based toggle switch component for Ember.js",
   "directories": {
@@ -12,7 +12,7 @@
     "test": "ember test",
     "testall": "ember try:testall"
   },
-  "repository": "https://github.com/knownasilya/ember-cli-toggle",
+  "repository": "https://github.com/eflexsystems/ember-cli-toggle",
   "engines": {
     "node": ">= 0.10.0"
   },
