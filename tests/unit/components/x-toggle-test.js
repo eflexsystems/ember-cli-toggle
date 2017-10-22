@@ -1,8 +1,8 @@
+import { run } from '@ember/runloop';
 import {
   moduleForComponent,
   test
 } from 'ember-qunit';
-import Ember from 'ember';
 
 moduleForComponent('x-toggle', {
   unit: true
@@ -27,13 +27,13 @@ test('changing toggled changes state', function(assert) {
 
   assert.equal(this.$('input.x-toggle').prop('checked'), false, 'unchecked by default');
 
-  Ember.run(() => {
+  run(() => {
     component.set('toggled', true);
   });
 
   assert.equal(this.$('input.x-toggle').prop('checked'), true, 'checked when toggled: true');
 
-  Ember.run(() => {
+  run(() => {
     component.set('toggled', false);
   });
 
@@ -47,13 +47,13 @@ test('changing disabled', function(assert) {
 
   assert.equal(this.$('input.x-toggle').prop('disabled'), false, 'disabled by default');
 
-  Ember.run(() => {
+  run(() => {
     component.set('disabled', true);
   });
 
   assert.equal(this.$('input.x-toggle').prop('disabled'), true, 'disabled when disabled: true');
 
-  Ember.run(() => {
+  run(() => {
     component.set('disabled', false);
   });
 
@@ -65,7 +65,7 @@ test('toggle action fires when toggled changed from false to true', function (as
 
   var component = this.subject({ toggled: false });
 
-  Ember.run(() => {
+  run(() => {
     component.set('toggle', (toggleVal) => {
       assert.ok(toggleVal);
       component.set('toggle', null);
@@ -80,7 +80,7 @@ test('toggle action fires when toggled changed from true to false', function (as
 
   var component = this.subject({ toggled: true });
 
-  Ember.run(() => {
+  run(() => {
     component.set('toggle', (toggleVal) => {
       assert.notOk(toggleVal);
     });

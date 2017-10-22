@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from './template';
 
-const { computed } = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
   tagName: 'span',
   classNameBindings: ['value:x-toggle-container-checked', 'disabled:x-toggle-container-disabled'],
