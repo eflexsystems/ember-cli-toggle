@@ -1,6 +1,6 @@
 {
   "name": "eflex-ember-cli-toggle",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Checkbox based toggle switch component for Ember.js",
   "keywords": [
     "component",
