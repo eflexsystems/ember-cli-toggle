@@ -1,6 +1,6 @@
 {
   "name": "@eflexsystems/ember-cli-toggle",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Checkbox based toggle switch component for Ember.js",
   "keywords": [
     "component",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^7.5.0",
-    "ember-cli-htmlbars": "^4.0.5"
+    "ember-cli-htmlbars": "^5.7.1"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
